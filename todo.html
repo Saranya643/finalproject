@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="todo.css" />
+    <title>Simple To-Do List</title>
+</head>
+<body>
+    <div class="container">
+        <h1>To-Do List</h1>
+        <input type="text" id="taskInput" placeholder="New task">
+        <div class="btn-container">
+        <button id="addButton">Add Task</button>
+        </div>
+        <ul id="taskList"></ul>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const taskInput = document.getElementById('taskInput');
+            const addButton = document.getElementById('addButton');
+            const taskList = document.getElementById('taskList');
+
+            addButton.addEventListener('click', function() {
+                const taskText = taskInput.value.trim();
+
+                if (taskText !== '') {
+                    const task = document.createElement('li');
+                    task.className = 'task';
+
+                    const taskTextElement = document.createElement('span');
+                    taskTextElement.textContent = taskText;
+
+                    const deleteButton = document.createElement('button');
+                    deleteButton.className = 'deleteButton';
+                    deleteButton.textContent = 'Delete';
+
+                    deleteButton.addEventListener('click', function() {
+                        taskList.removeChild(task);
+                    });
+
+                    task.appendChild(taskTextElement);
+                    task.appendChild(deleteButton);
+                    taskList.appendChild(task);
+
+                    taskInput.value = '';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
